@@ -183,5 +183,124 @@
     }
     .rr-unlock button::after { content: "  ➔"; }
     .rr-unlock button:active { transform: translateY(2px); border-bottom-width: 2px; }
+
+    /* ---- side panels (panels.ts; Road Rash fonts and art) ---- */
+    .rr-panel {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 0 calc(16px * var(--scale, 1));
+        font-family: "Futura RR", "Futura", "Arial Narrow", sans-serif;
+        color: #f4f0e6;
+        user-select: none;
+    }
+    .rr-left { left: 0; }
+    .rr-right { right: 0; }
+    .rr-card {
+        width: 100%;
+        max-width: calc(300px * var(--scale, 1));
+        background: linear-gradient(180deg, rgba(40, 32, 60, .78), rgba(10, 8, 20, .88));
+        border: 1px solid rgba(255, 106, 42, .35);
+        border-left: 4px solid #ff6a2a;
+        box-shadow: 0 0 40px rgba(110, 60, 200, .25);
+        padding: calc(18px * var(--scale, 1)) calc(18px * var(--scale, 1)) calc(14px * var(--scale, 1));
+    }
+    .rr-title {
+        font-family: "Badloc", sans-serif;
+        font-size: calc(46px * var(--scale, 1));
+        color: #ff6a2a;
+        line-height: 1;
+        text-shadow: 3px 3px 0 #000;
+        margin-bottom: calc(6px * var(--scale, 1));
+    }
+    .rr-section {
+        font-family: "Futura RR", sans-serif;
+        font-weight: bold;
+        font-size: calc(19px * var(--scale, 1));
+        color: #f7e26b;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        margin: calc(12px * var(--scale, 1)) 0 calc(4px * var(--scale, 1));
+    }
+    .rr-section::before { content: "➔ "; color: #f7e26b; }
+    .rr-row {
+        display: flex;
+        align-items: center;
+        gap: calc(10px * var(--scale, 1));
+        padding: calc(4px * var(--scale, 1)) calc(6px * var(--scale, 1));
+        background: rgba(0, 0, 0, .35);
+        margin: calc(3px * var(--scale, 1)) 0;
+    }
+    .rr-keys { display: flex; gap: 4px; flex: none; min-width: calc(60px * var(--scale, 1)); }
+    .rr-label { font-size: calc(19px * var(--scale, 1)); text-shadow: 1px 1px 0 #000; }
+    kbd {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: calc(26px * var(--scale, 1));
+        height: calc(26px * var(--scale, 1));
+        padding: 0 calc(5px * var(--scale, 1));
+        box-sizing: border-box;
+        font-family: "Futura RR", sans-serif;
+        font-weight: bold;
+        font-size: calc(16px * var(--scale, 1));
+        color: #1a1420;
+        background: linear-gradient(180deg, #fff6d8, #d9c99a);
+        border-bottom: 3px solid #8a7a52;
+        border-radius: 4px;
+    }
+    kbd.rr-wide { font-size: calc(13px * var(--scale, 1)); }
+    .rr-foot {
+        margin-top: calc(12px * var(--scale, 1));
+        font-size: calc(13px * var(--scale, 1));
+        color: #a99cc7;
+    }
+    .rr-stack { width: 100%; max-width: calc(300px * var(--scale, 1)); }
+    .rr-stack .rr-title { text-align: right; margin-bottom: calc(10px * var(--scale, 1)); }
+    .rr-portrait {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        overflow: hidden;
+        border: 1px solid rgba(255, 106, 42, .35);
+        border-right: 4px solid #ff6a2a;
+        box-shadow: 0 0 40px rgba(110, 60, 200, .25);
+        background: #000;
+    }
+    .rr-portrait img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 38% 30%;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .rr-portrait img.rr-on { opacity: 1; }
+    .rr-quote {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(34px * var(--scale, 1));
+        padding: calc(10px * var(--scale, 1)) calc(12px * var(--scale, 1));
+        background: rgba(0, 0, 0, .62);
+        font-size: calc(19px * var(--scale, 1));
+        line-height: 1.15;
+        text-shadow: 1px 1px 0 #000;
+    }
+    .rr-who {
+        position: absolute;
+        right: calc(10px * var(--scale, 1));
+        bottom: calc(6px * var(--scale, 1));
+        font-family: "Badloc", sans-serif;
+        font-size: calc(26px * var(--scale, 1));
+        color: #ff6a2a;
+        text-shadow: 2px 2px 0 #000;
+    }
 </style>
 <script src="coi-serviceworker.min.js"></script>
