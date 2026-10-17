@@ -96,6 +96,10 @@ Add `?keys=classic` to the address for the original keys (arrows, Ins, Space, En
 - **Test natively first.** Native builds are much faster to debug than the browser, and once native works, the wasm build mostly comes along.
 - **Watch for undocumented behaviour old games rely on.** In this game: the CD check (`GetDriveTypeA`), child windows used as buttons, and the exit code carried in `WM_QUIT`.
 
+## Source
+
+The code changes (the Win32 additions, the browser host, the loading and caching, and the build scripts) are on the `roadrash` branch of my Theseus fork: **https://github.com/kaustubhxd/theseus/tree/roadrash** (start with `roadrash/README.md`). It has no game content: you translate your own copy of the game with Theseus.
+
 ## Credits
 
 - [Theseus](https://github.com/evmar/theseus) by Evan Martin: the translator and Win32 base this builds on.
