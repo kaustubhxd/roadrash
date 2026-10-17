@@ -28,23 +28,27 @@ self.addEventListener("message", (e) => {
 function isolate(res) {
   if (res.status === 0) return res;
   const headers = new Headers(res.headers);
+  // The body we pass on is already decompressed; its old size/encoding would be wrong.
+  headers.delete("Content-Encoding");
+  headers.delete("Content-Length");
   headers.set("Cross-Origin-Opener-Policy", "same-origin");
   headers.set("Cross-Origin-Embedder-Policy", "require-corp");
   headers.set("Cross-Origin-Resource-Policy", "same-origin");
   return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
 }
 
-async function gameFile(req) {
+// Answer at once and store a copy in the background (waitUntil): waiting for
+// the store first could stall large files, since one copy of the body would
+// sit unread while the other is written.
+async function gameFile(e) {
+  const req = e.request;
   const cache = await caches.open(CACHE);
   const hit = await cache.match(req.url);
   if (hit) return hit;
   const res = await fetch(req.url);
-  if (res.ok) {
-    const out = isolate(res);
-    await cache.put(req.url, out.clone());
-    return out;
-  }
-  return isolate(res);
+  const out = isolate(res);
+  if (res.ok) e.waitUntil(cache.put(req.url, out.clone()).catch(() => {}));
+  return out;
 }
 
 self.addEventListener("fetch", (e) => {
@@ -52,7 +56,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
   const path = new URL(req.url).pathname;
   if (/\/rr\/./.test(path) && !path.endsWith("/rr/crypt.json") && !req.headers.has("range")) {
-    e.respondWith(gameFile(req));
+    e.respondWith(gameFile(e));
   } else {
     e.respondWith(fetch(req).then(isolate));
   }
