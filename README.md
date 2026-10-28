@@ -4,7 +4,7 @@
 
 EA's *Road Rash* for Windows 95, running in a web page with menus, races, music, cut-scenes and saves at full speed. It isn't an emulator: the game's x86 machine code was **statically translated to Rust** with [Theseus](https://github.com/evmar/theseus) and compiled to **WebAssembly**. The same translated code also runs as a native macOS app.
 
-This is a personal hobby project and has nothing to do with EA. The game's code and data in this repo are **encrypted** and the site asks for a password, so it isn't a way to get the game. If you want to try this approach yourself, you'll need your own copy.
+This is a personal hobby project and has nothing to do with EA. If you want to try this approach yourself, you'll need your own copy.
 
 ---
 
@@ -59,7 +59,7 @@ Two gotchas that cost me time:
 
 ## Encryption
 
-The repo is public (free GitHub Pages requires that), so the WebAssembly and every game file are encrypted with ChaCha20. The key comes from the password via PBKDF2. Decryption is plain JavaScript rather than WebCrypto because the game's synchronous file reads can't wait for an async API. It decrypts at a few hundred MB/s, so even a 55 MB video takes a fraction of a second.
+The repo is public (free GitHub Pages requires that), so the WebAssembly and every game file are stored encrypted with ChaCha20; the page decrypts them in your browser automatically. Decryption is plain JavaScript rather than WebCrypto because the game's synchronous file reads can't wait for an async API. It decrypts at a few hundred MB/s, so even a 55 MB video takes a fraction of a second.
 
 ## Controls (WASD layout)
 
