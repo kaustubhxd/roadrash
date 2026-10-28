@@ -1,0 +1,9 @@
+{
+  "name": "Road Rash",
+  "short_name": "Road Rash",
+  "start_url": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#000000",
+  "theme_color": "#000000"
+}

@@ -1,8 +1,14 @@
 <!doctype html>
-<script type="module" crossorigin src="./assets/index-BJ2lG2mE.js"></script>
+<script type="module" crossorigin src="./assets/index-BUYhHG3g.js"></script>
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Road Rash" />
+<link rel="manifest" href="app.webmanifest" />
 <style>
     /* Road Rash evaluation: the game fills the window (4:3, centred, crisp pixels). */
     html, body {
@@ -21,6 +27,14 @@
     }
     canvas {
         image-rendering: pixelated;
+    }
+    /* Phones: 100vh includes the hidden part behind the address bar. */
+    @supports (height: 100dvh) {
+        .window, .rr-lart {
+            width: min(100vw, calc(100dvh * 4 / 3));
+            height: min(100dvh, calc(100vw * 3 / 4));
+        }
+        .rr-lband { width: min(100vw, calc(100dvh * 4 / 3)); }
     }
     #console {
         display: none;
@@ -346,5 +360,80 @@
         opacity: .6;
     }
     .rr-mute:hover { opacity: 1; }
+
+    /* ---- touch screens (touch.ts): on-screen buttons over the margins ---- */
+    body.rr-touchmode {
+        position: fixed;
+        inset: 0;
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    body.rr-touchmode canvas.window { touch-action: none; }
+    .rr-touch {
+        --pad: 3vmin;
+        position: fixed;
+        inset: 0;
+        z-index: 6;
+        pointer-events: none;
+        font-family: "Futura RR", "Futura", "Arial Narrow", sans-serif;
+    }
+    .rr-pad { position: absolute; display: flex; flex-direction: column; gap: 2.5vmin; }
+    .rr-row2 { display: flex; gap: 2.5vmin; align-items: flex-end; }
+    .rr-padl { left: calc(var(--pad) + env(safe-area-inset-left)); bottom: calc(var(--pad) + env(safe-area-inset-bottom)); }
+    .rr-padr { right: calc(var(--pad) + env(safe-area-inset-right)); bottom: calc(var(--pad) + env(safe-area-inset-bottom)); align-items: flex-end; }
+    .rr-padr .rr-row2 { justify-content: flex-end; }
+    .rr-padtl { left: calc(var(--pad) + env(safe-area-inset-left)); top: calc(var(--pad) + env(safe-area-inset-top)); }
+    .rr-padtr { right: calc(var(--pad) + env(safe-area-inset-right) + 13vmin); top: calc(var(--pad) + env(safe-area-inset-top)); flex-direction: row; }
+    .rr-btn {
+        pointer-events: auto;
+        touch-action: none;
+        box-sizing: border-box;
+        width: 15vmin;
+        height: 15vmin;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 50%;
+        background: rgba(10, 8, 20, .45);
+        border: 2px solid rgba(255, 106, 42, .65);
+        color: #f4f0e6;
+        font-size: 3.4vmin;
+        font-weight: bold;
+        line-height: 1;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 0 #000;
+        transition: transform .05s;
+    }
+    .rr-big { width: 22vmin; height: 22vmin; font-size: 7vmin; }
+    .rr-gas { width: 27vmin; height: 27vmin; font-size: 5vmin; color: #f7e26b; border-color: rgba(247, 226, 107, .8); }
+    .rr-fight { width: 14vmin; height: 14vmin; font-size: 2.6vmin; border-color: rgba(247, 226, 107, .55); }
+    .rr-small { width: 11vmin; height: 11vmin; border-radius: 22%; font-size: 3vmin; }
+    .rr-icon { font-family: system-ui, sans-serif; font-size: 5vmin; }
+    .rr-btn.rr-down { background: rgba(255, 106, 42, .6); transform: scale(.93); }
+    /* The soft keyboard types into this; 16px stops iOS zooming in on focus. */
+    .rr-typer { position: fixed; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; border: 0; padding: 0; font-size: 16px; pointer-events: none; }
+    body.rr-touchmode .rr-mute {
+        top: calc(3vmin + env(safe-area-inset-top));
+        right: calc(3vmin + env(safe-area-inset-right));
+        bottom: auto;
+        width: 11vmin;
+        height: 11vmin;
+        font-size: 5vmin;
+        opacity: .8;
+    }
+    /* Upright phone: the game at the top, the buttons in the space below. */
+    @media (orientation: portrait) {
+        body.rr-touchmode .window {
+            top: env(safe-area-inset-top);
+            transform: translateX(-50%);
+        }
+        body.rr-touchmode .rr-padtl,
+        body.rr-touchmode .rr-padtr,
+        body.rr-touchmode .rr-mute { top: calc(75vw + env(safe-area-inset-top) + var(--pad, 3vmin)); }
+    }
 </style>
 <script src="rr-sw-register.js"></script>
