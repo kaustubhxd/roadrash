@@ -1,5 +1,5 @@
 <!doctype html>
-<script type="module" crossorigin src="./assets/index-oxZzE5cU.js"></script>
+<script type="module" crossorigin src="./assets/index-BjId9Yio.js"></script>
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
@@ -27,6 +27,11 @@
     }
     canvas {
         image-rendering: pixelated;
+    }
+    /* upscale.ts draws the game at device resolution over the input canvas. */
+    canvas.rr-upscale {
+        pointer-events: none;
+        image-rendering: auto;
     }
     /* Phones: 100vh includes the hidden part behind the address bar. */
     @supports (height: 100dvh) {
