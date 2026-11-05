@@ -1,5 +1,5 @@
 <!doctype html>
-<script type="module" crossorigin src="./assets/index-BjId9Yio.js"></script>
+<script type="module" crossorigin src="./assets/index-BN5q2FM1.js"></script>
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
@@ -435,11 +435,11 @@
     .rr-mp-row input:focus { border-color: #f7e26b; }
     .rr-mp-row button { width: auto; margin: 0; padding: 10px 16px; }
     .rr-mp-err { color: #ff8a6a !important; min-height: 1em; margin: 6px 0 0 !important; font-size: 15px !important; }
+    /* Top-right corner of the game: in a race the player list is top-left, chat top-centre. */
     .rr-room {
         position: fixed;
-        left: 50%;
+        right: calc((100vw - min(100vw, 100vh * 4 / 3)) / 2 + 6px);
         top: calc(6px + env(safe-area-inset-top));
-        transform: translateX(-50%);
         z-index: 8;
         display: flex;
         align-items: center;
@@ -450,6 +450,9 @@
         border-radius: 16px;
         font: bold 14px "Futura RR", "Futura", sans-serif;
         color: #f7e26b;
+    }
+    @supports (height: 100dvh) {
+        .rr-room { right: calc((100vw - min(100vw, 100dvh * 4 / 3)) / 2 + 6px); }
     }
     .rr-room .rr-room-bad { color: #ff8a6a; }
     .rr-room button {
